@@ -1,48 +1,54 @@
 package am;
 
 public class GraphM {
-    int g[][];
+    int g [][];
     int size;
-    String label[];
-
-    GraphM(int s) {
+    String label [];
+    
+    
+    //constructors
+    GraphM(int s){
         this.size = s;
         g = new int[s][s];
     }
-
-    GraphM(int s, String[] label) {
+    
+    GraphM(int s, String [] l){
         this.size = s;
         g = new int[s][s];
-        this.label = label;
+        this.label = l;
     }
-
-    void addEdge(int i, int j) {
-        g[i][j] = 1;
-        g[j][i] = 1;
+    
+    //add edge
+    void addEdge(int v1, int v2){
+        g[v1][v2]=1;
+        g[v2][v1]=1;
     }
-
+    
+    //print the graph
     public String toString(){
-        String output = "";
-        for (int i = 0; i < g.length; i++) {
-            output += label[i] + ": ";
-            for (int j = 0; j < g[0].length; j++) {
-                output += g[i][j] + " ";
+        String output="";
+        
+        for(int i=0;i<g.length;i++){
+            output+= label[i]+ "-->";
+            for(int j=0; j<g[0].length;j++){
+                if(g[i][j]==1){
+                    output+= label[j]+" ";
+                }
             }
-            output += "\n";
+            output+="\n";
         }
+        
         return output;
     }
 
     public static void main(String[] args) {
-        GraphM g = new GraphM(5, new String[]{"A", "B", "C", "D", "E"});
+        GraphM g = new GraphM(4, new String[]{"A", "B", "C", "D"});
 
         g.addEdge(0, 1);
         g.addEdge(0, 2);
         g.addEdge(1, 2);
         g.addEdge(1, 3);
         g.addEdge(2, 3);
-        g.addEdge(2, 4);
-        g.addEdge(3, 4);
 
         System.out.print(g.toString());
     }
